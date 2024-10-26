@@ -7,7 +7,7 @@ const fs = require('fs');
 async function generateContent() {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_KEY);
-
+    
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
     const uploadResponse = await fileManager.uploadFile("./TestPapers/Paper1.pdf", {
@@ -26,5 +26,6 @@ async function generateContent() {
         { text: prompt },
       ]);
     console.log(result.response.text());
+    console.log("breakpoint");
   }
 generateContent();
