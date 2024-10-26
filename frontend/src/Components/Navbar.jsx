@@ -26,17 +26,22 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      {isAuthenticated ? (
-        <Link to="/account" className="account-link">Account</Link> // Link to account page if authenticated
-      ) : (
-        <GoogleLoginButton className="login" /> // Login button if not authenticated
-      )}
-      <li className="uploads">
-        <Link to="/upload" className="uploads">Upload PDF</Link>
+      <li className="home">
+        <Link to="/" className="home-link">Home</Link>
       </li>
-      <li className="uploads">
-        <Link to="/past-uploads" className="upload-link">Past Uploads</Link>
-      </li>
+      <div className="rightLinks">
+        {isAuthenticated ? (
+          <Link to="/account" className="account-link">Account</Link> // Link to account page if authenticated
+        ) : (
+          <GoogleLoginButton className="login" /> // Login button if not authenticated
+        )}
+        <li className="uploads">
+          <Link to="/upload" className="uploads">Upload PDF</Link>
+        </li>
+        <li className="uploads">
+          <Link to="/past-uploads" className="upload-link">Past Uploads</Link>
+        </li>
+      </div>
     </div>
   );
 };

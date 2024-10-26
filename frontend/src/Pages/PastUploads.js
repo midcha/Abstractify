@@ -38,16 +38,27 @@ const PastUploads = () => {
     <div className='wrapper'>
       <div className="headAndFirst">
         <h2>Past Uploads</h2>
-        <div className="firstUpload">
-          hello this is the first upload
+        <div className="recentUpload">
+          <a id="uploadWrapperLink">
+            <h3>
+              RESEARCH PAPER TITLE
+            </h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non velit nec justo aliquet feugiat. Etiam in nulla varius, condimentum quam id, interdum enim. Aliquam ornare augue eu velit interdum, aliquam accumsan quam euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer nisl ipsum, vehicula nec euismod condimentum, efficitur id velit. Duis ultricies tellus vel lacus congue rutrum. Cras pulvinar rhoncus sodales. Nam dolor enim, dapibus vel mi lobortis, tempor efficitur mauris. Donec lobortis justo ac orci pharetra, et lobortis enim auctor. Nunc in eleifend nulla, nec accumsan urna.
+            </p>
+          </a>
         </div>
       </div>
-      <p>Here you can view your past uploads.</p>
-      <ul>
-        <li>Upload 1</li>
-        <li>Upload 2</li>
-        <li>Upload 3</li>
-      </ul>
+      <div className="genUploads">
+        <a id="uploadWrapperLink">
+          <h3>
+            RESEARCH PAPER TITLE
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non velit nec justo aliquet feugiat. Etiam in nulla varius, condimentum quam id, interdum enim. Aliquam ornare augue eu velit interdum, aliquam accumsan quam euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer nisl ipsum, vehicula nec euismod condimentum, efficitur id velit. Duis ultricies tellus vel lacus congue rutrum. Cras pulvinar rhoncus sodales. Nam dolor enim, dapibus vel mi lobortis, tempor efficitur mauris. Donec lobortis justo ac orci pharetra, et lobortis enim auctor. Nunc in eleifend nulla, nec accumsan urna.
+          </p>
+        </a>
+      </div>
     </div>
   );
 };

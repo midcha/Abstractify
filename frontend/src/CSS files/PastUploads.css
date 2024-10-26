@@ -1,7 +1,5 @@
-
-
 .wrapper {
-    background-color: rgb(165, 206, 211);
+    background-color: white;
     width: 100vw;
     display:flex;
     flex-direction: column;
@@ -9,6 +7,7 @@
     margin-left: auto;
     margin-right: auto;
     padding-top: 5vh;
+    gap: 4em;
 }
 
 .headAndFirst {
@@ -19,15 +18,52 @@
 }
 
 .headAndFirst h2 {
-    background-color: white;
+    background-color: rgb(228, 246, 255);
     font-size: 4em;
     padding: 1em;
     border-radius: 1rem;
-    box-shadow: -32px 16px teal;
+    box-shadow: -32px 16px rgb(24, 112, 179);
+}
+.wrapper h3 {
+    font-size: x-large;
+    font-weight: 800;
 }
 
-.firstUpload {
-    background-color: blue;
+.recentUpload {
+    background-color: rgb(200, 211, 215);
+    padding: 1em;
+    border-radius: .5rem;
     width:50vw;
-    
+    height:15vh;
+
 }
+.recentUpload:hover {
+    background-color: rgb(228, 246, 255);
+    cursor: pointer;
+}
+
+.genUploads {
+    margin-left: 4em;
+    margin-right: 4em;
+    padding: 1em;
+    height: 15vh;
+    background-color: rgb(200, 211, 215);
+    border-radius: .5rem;
+}
+.genUploads:hover {
+    background-color: rgb(228, 246, 255);
+    cursor: pointer;
+}
+
+.wrapper .recentUpload p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#uploadWrapperLink {
+    text-decoration: none;
+}
+

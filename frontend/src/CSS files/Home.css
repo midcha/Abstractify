@@ -9,6 +9,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Inter';
+    background: linear-gradient(to top right, rgb(248, 253, 255) 40%, rgb(190, 226, 255) 80%);
 }
 .mainbox {
     display: flex;
@@ -19,12 +20,13 @@ body {
     height: auto; 
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to right, rgb(234, 254, 254), rgb(170, 217, 255)); 
+
     /*background-color: rgb(165, 206, 211);*/
 }
 
 
 .mainbox h1 {
+    color: rgb(48, 101, 154);
     font-size: 8em;
     z-index: 0;
     position: relative; /* Important for positioning the pseudo-element */
@@ -37,7 +39,7 @@ body {
     display: block; /* Make it a block element */
     width: 100%; /* Make it full width */
     height: 0.06em; /* Adjust the height of the underline */
-    background: linear-gradient(to right, rgb(165, 206, 211), rgb(106, 171, 193)); /* Gradient color */
+    background: linear-gradient(to right, rgb(246, 254, 255), rgb(102, 163, 255)); /* Gradient color */
     position: absolute; /* Position it absolutely */
     left: 0; /* Align to the left */
     bottom: 0.075em; /* Position below the text */
@@ -57,7 +59,7 @@ body {
     animation-range: cover 0% cover 50%;
     border-radius: 1em;
     /* box-shadow: -12px 12px 2px 1px rgba(0, 0, 255, .2); */
-    box-shadow: -32px 16px teal;
+    box-shadow: -32px 16px rgb(24, 112, 179);
 
 }
 .about {
@@ -84,7 +86,7 @@ body {
 .contact {
     width: 30vw;
     height: 20vw;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
 
 }
 .getStarted {
@@ -107,5 +109,14 @@ body {
     to {
         opacity: 1;
         scale: 1;
+    }
+}
+
+@keyframes gradientFade {
+    from {
+        background: linear-gradient(to right, rgb(234, 254, 254), rgb(170, 217, 255));
+    }
+    to {
+        background: rgb(170, 217, 255, 0.1);
     }
 }

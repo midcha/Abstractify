@@ -5,7 +5,6 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './Components/Navbar';  // Import Navbar component
 import Home from './Pages/Home';       // Import Home component
-import Login from './Pages/Login';     // Import Login component
 import PastUploads from './Pages/PastUploads'; // Import PastUploads component
 import Upload from './Pages/Upload';
 import Account from './Pages/Account';
@@ -15,7 +14,6 @@ const App = () => (
     <Navbar />
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
       <Route path="/past-uploads" element={<PastUploads />} />
       <Route path="/upload" element ={<Upload />} />
       <Route path = "/account" element={<Account />} />

@@ -4,32 +4,59 @@
     height: 8vh;
     display: flex;
     align-items: center;
-    justify-content: right;
-    background: linear-gradient(to right, rgb(234, 254, 254), rgb(170, 217, 255));
+    justify-content: space-between;
     padding: 10px; /* Optional: add some padding */
     z-index: 1000;
+    gap: 2em;
+    margin-right: 2em;
 }
 
 .navbar > * {
-    border: 2px solid;
-    border-radius: 8px;
-}
-
-.login {
     font-size: larger;
-    margin-right: 2em;
-    font-family: inherit;
+    background: none;
+    list-style: none;
+    border: none;
+    font:inherit;
+    font-weight: 400;
 }
-.login:hover {
-    cursor:pointer;
+.rightLinks {
+    display: flex;
+    justify-content: space-between;
+    width: 20vw;
+}
+.rightLinks > *:hover {
+    cursor: pointer;
 }
 .uploads {
-    font-size: larger;
-    list-style: none;
+    text-decoration: none;
+    color: black;
 }
 .upload-link {
     text-decoration: none;
-    font-family: inherit;
+    color: black;
+}
+.account-link {
+    text-decoration: none;
+    color: black;
+}
+.home-link {
+    text-decoration: none;
+    color:black;
+    padding-left: 2em;
+    font-size: larger;
+    font-weight: bolder;
+}
+.login-button {
+    text-decoration: none;
+    font-size: larger;
+    background: none;
+    list-style: none;
+    border: none;
+    font:inherit;
+    font-weight: 400;
+}
+.login-button:hover {
+    cursor: pointer;
 }
 
 
@@ -43,7 +70,8 @@
 
 
 
-#dropdown {
+
+/* #dropdown {
     order: 10;
     width: 4em;
     height: 4em;
@@ -174,4 +202,4 @@
         opacity: 0;
         visibility: hidden;
     }
-}
+} */
