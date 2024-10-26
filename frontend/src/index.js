@@ -8,6 +8,7 @@ import Home from './Pages/Home';       // Import Home component
 import Login from './Pages/Login';     // Import Login component
 import PastUploads from './Pages/PastUploads'; // Import PastUploads component
 import Upload from './Pages/Upload';
+import Account from './Pages/Account';
 // Main App Component with Router
 const App = () => (
   <Router>
@@ -17,6 +18,7 @@ const App = () => (
       <Route path="/login" element={<Login />} />
       <Route path="/past-uploads" element={<PastUploads />} />
       <Route path="/upload" element ={<Upload />} />
+      <Route path = "/account" element={<Account />} />
     </Routes>
   </Router>
 );
