@@ -1,0 +1,140 @@
+.navbar {
+    margin-top: 0;
+    padding: 0;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+#dropdown {
+    order: 10;
+    width: 4em;
+    height: 4em;
+    margin-right: 2em;
+    display: block;
+    background: none;
+    border: none;
+    z-index: 999;
+}
+#dropdown div {
+    height: 12.5%;
+    border-radius: 4px;
+    background-color: rgb(140, 180, 185);
+    margin: 8% 0;
+    width: 100%;
+    transition: 500ms ease;
+    float: right;
+    clear: right;
+    
+}
+#dropdown:hover div{
+    background-color: rgb(174, 214, 219);
+    margin: 10% 0;
+    height: 14.5%;
+    transition: box-shadow 10ms ease, background-color 500ms ease, margin 500ms ease, height 500ms ease;
+}
+#dropdown:active div{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5) inset;
+}
+
+.overlay {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    background-color: rgb(48, 53, 55);
+    width: 100vw;
+    height: 100vh;
+    z-index: 998; 
+    opacity: 0.55;
+}
+.links {
+    display:flex;
+    flex-direction: column;
+    opacity: 100%;
+    gap: 0.5em;
+    width: fit-content;
+    margin-left: auto;
+    margin-top: 15%;
+    margin-right: 0em;
+    position: relative;
+    z-index: 999;
+    transform: translateX(3em);
+}
+.links a {
+    margin-left: auto;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: larger;
+    font-weight: bold;
+    order:id;
+    background-color: #a2afb3;
+    color: #FFF1DE;
+}
+.links a:hover {
+    background-color: #899da5fe;
+}
+.show {
+    visibility: hidden;
+}
+.show a {
+    opacity: 0;
+    animation: fadeInDisplay 2s forwards;
+    
+}
+.show a:nth-child(1) {
+    animation-delay: 0;
+}
+.show a:nth-child(2) {
+    animation-delay: 0.1s;
+}
+.show a:nth-child(3) {
+    animation-delay: 0.2s;
+}
+.show a:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+.hide {
+    visibility: show;
+}
+.hide a {
+    animation: fadeOutDisplay 1s forwards;
+}
+.hide a:nth-child(1) {
+    animation-delay: 0;
+}
+.hide a:nth-child(2) {
+    animation-delay: 0.1s;
+}
+.hide a:nth-child(3) {
+    animation-delay: 0.2s;
+}
+.hide a:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+@keyframes fadeInDisplay {
+    from {
+        opacity: 0;
+        visibility: hidden;
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+@keyframes fadeOutDisplay {
+    from {
+        opacity: 1;
+        visibility: visible;
+
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
