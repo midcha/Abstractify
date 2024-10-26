@@ -2,7 +2,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom'; 
-import styles from '../CSS files/Navbar.module.css';
+import '../CSS files/Navbar.css';
+import GoogleLoginButton from '../Components/GoogleLoginButton';
+import PastUploads from '../Pages/PastUploads';
+
 
 const Navbar = () => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -13,18 +16,11 @@ const Navbar = () => {
   };
 
   return(
-    <div className={styles.navbar}>
-      <button id={styles.dropdown} onClick={toggleMenu}>
-        <div></div>
-        <div></div>
-        <div></div>
-      </button>
-      {menuVisible && <div className={styles.overlay} onClick={toggleMenu} />}
-      <div className={`${styles.links} ${menuVisible ? styles.show : (hasOpened ? styles.hide : styles.hidden)}`}>
-        <a href="/Upload">Upload</a>
-        <a href="/Login">Login</a>
-        <a href="About">About</a>
-      </div>
+    <div className="navbar">
+      <GoogleLoginButton className="login"></GoogleLoginButton>
+      <li className="uploads">
+        <Link to="/past-uploads" className="upload-link">Uploads</Link>
+      </li>
     </div>
     
   );

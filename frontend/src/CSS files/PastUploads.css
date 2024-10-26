@@ -1,0 +1,33 @@
+
+
+.wrapper {
+    background-color: rgb(165, 206, 211);
+    width: 100vw;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5vh;
+}
+
+.headAndFirst {
+    display: flex;
+    align-items: center;
+    width: 90vw;
+    justify-content: space-between;
+}
+
+.headAndFirst h2 {
+    background-color: white;
+    font-size: 4em;
+    padding: 1em;
+    border-radius: 1rem;
+    box-shadow: -32px 16px teal;
+}
+
+.firstUpload {
+    background-color: blue;
+    width:50vw;
+    
+}
