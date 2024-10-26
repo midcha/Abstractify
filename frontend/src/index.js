@@ -7,7 +7,7 @@ import Navbar from './Components/Navbar';  // Import Navbar component
 import Home from './Pages/Home';       // Import Home component
 import Login from './Pages/Login';     // Import Login component
 import PastUploads from './Pages/PastUploads'; // Import PastUploads component
-
+import Upload from './Pages/Upload';
 // Main App Component with Router
 const App = () => (
   <Router>
@@ -16,6 +16,7 @@ const App = () => (
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/past-uploads" element={<PastUploads />} />
+      <Route path="/upload" element ={<Upload />} />
     </Routes>
   </Router>
 );
