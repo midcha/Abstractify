@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const passport = require('passport');
-const session = require('express-session'); // Import express-session
+const session = require('express-session');
 
 dotenv.config();
 const app = express();
@@ -42,5 +42,9 @@ mongoose.connect(process.env.MONGO_URI, {
 // Import and use auth routes
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
+
+// Import and use pdfRoutes for PDF uploads and processing
+const pdfRoutes = require('./routes/pdfRoutes');
+app.use('/api', pdfRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

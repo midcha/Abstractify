@@ -4,6 +4,7 @@ require('dotenv').config();
 const fs = require('fs');
 
 async function generateContent() {
+    console.log("using categorize");
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_KEY);
     

@@ -1,11 +1,48 @@
 .navbar {
+    width: auto;
     margin-top: 0;
-    padding: 0;
-    height: 10vh;
+    height: 8vh;
     display: flex;
     align-items: center;
     justify-content: right;
+    background: linear-gradient(to right, rgb(234, 254, 254), rgb(170, 217, 255));
+    padding: 10px; /* Optional: add some padding */
+    z-index: 1000;
 }
+
+.navbar > * {
+    border: 2px solid;
+    border-radius: 8px;
+}
+
+.login {
+    font-size: larger;
+    margin-right: 2em;
+    font-family: inherit;
+}
+.login:hover {
+    cursor:pointer;
+}
+.uploads {
+    font-size: larger;
+    list-style: none;
+}
+.upload-link {
+    text-decoration: none;
+    font-family: inherit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 #dropdown {
     order: 10;
     width: 4em;
