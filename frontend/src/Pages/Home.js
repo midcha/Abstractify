@@ -1,7 +1,7 @@
 import React from 'react';
 import '../CSS files/Home.css';
 import geko from '../Images/geko.jpg';
-import sample from '../Images/sample_abstract.jpg';
+import sample from '../Images/Output.png';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
               About Abstractify
             </h2>
             <p>
-              Abstractify is a browser-based tool for generating visual abstracts, built using Gemini and Claude. 
+              Abstractify is a browser-based tool for generating visual abstracts, built with Gemini. 
               Simply feed it a research paper and it will generate you a visual abstract!
             </p>
             <p>
@@ -31,7 +31,7 @@ const Home = () => {
           <div id="imgCaption">
             <img src={sample} alt="sample output" />
             <h4>
-              Sample output from ____
+              Sample Output
             </h4>
           </div>
           <div id='infoBox' className="demos">
@@ -44,20 +44,15 @@ const Home = () => {
                 <span className="blueBold"> Get Started</span> button in the bottom right
               </li>
               <li>
-                Upload the pdf file of the research paper you desire to generate an abstraction of
+                Upload the pdf file of the research paper you want to generate a visual abstract of
               </li>
               <li>
-                Wait for the output to generate and viola! You're done!
+                Wait for the output to generate and <span className="blueBold">voila</span>! You're done! Past uploads and outputs may be view in the past uploads tab.
               </li>
             </ol>
           </div>
         </div>
         <div className="bottom">
-          <div id='infoBox' className="contact">
-            <h2>
-              Extra Information
-            </h2>
-          </div>
           <div className="getStarted">
             <Link to="/Upload">Get Started</Link>
           </div>
