@@ -26,7 +26,6 @@
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7",
-    "react-live": "^4.1.7",
     "recharts": "^2.13.0"
   }
 }
