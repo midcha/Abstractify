@@ -45,6 +45,12 @@ app.use('/api/auth', authRoutes);
 
 // Import and use pdfRoutes for PDF uploads and processing
 const pdfRoutes = require('./routes/pdfRoutes');
-app.use('/api', pdfRoutes);
+app.use('/api/pdf', pdfRoutes);
+
+
+const toJsonRoutes = require('./routes/getJSON');
+app.use('/api/toJson', toJsonRoutes);
+
+
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
