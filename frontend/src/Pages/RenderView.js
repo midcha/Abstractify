@@ -92,12 +92,6 @@ const RenderView = () => {
                 <div className="error">{error}</div>
             ) : (
                 <>
-                    <div className="metadata mb-4 p-4 bg-gray-100 rounded">
-                        <h2 className="text-xl font-bold mb-2">{metadata.title}</h2>
-                        <p className="mb-1"><strong>DOI:</strong> {metadata.doi}</p>
-                        <p><strong>Date Accessed:</strong> {metadata.dateAccessed}</p>
-                    </div>
-
                     <LiveProvider code={code} scope={scope}>
                         <LivePreview />
                     </LiveProvider>
