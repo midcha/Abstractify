@@ -2,14 +2,15 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const { exec } = require('child_process');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { GoogleAIFileManager } = require("@google/generative-ai/server");
 require('dotenv').config();
 
 const router = express.Router();
 
 // Create uploads directory if it doesn't exist
 const uploadsDir = path.join(__dirname, '../uploads');
-if (!fs.existsSync(uploadsDir)) {
+if (!fs.existsSync(uploadsDir)){
     fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
@@ -34,34 +35,20 @@ const upload = multer({
     }
 });
 
-// Route to handle PDF upload, process, and trigger getJSON and JSONtoReact
-router.post('/upload-pdf', upload.single('pdf'), async (req, res) => {
+// Route to handle PDF upload
+router.post('/upload-pdf', upload.single('pdf'), (req, res) => {
     try {
         if (!req.file) {
+            console.error("No file uploaded or incorrect format.");
             return res.status(400).json({ message: "No file uploaded or incorrect format." });
         }
 
-        const filePath = req.file.path;
-
-        // Run getJSON.js after PDF upload
-        exec(`node ./Conversion/getJSON.js ${filePath}`, (error, stdout, stderr) => {
-            if (error) {
-                console.error("Error running getJSON.js:", stderr);
-                return res.status(500).json({ message: 'Failed to process PDF to JSON' });
-            }
-
-            // Proceed with JSONtoReact after getJSON.js completes
-            exec('node ./Conversion/JSONtoReact.js', (error, stdout, stderr) => {
-                if (error) {
-                    console.error("Error running JSONtoReact.js:", stderr);
-                    return res.status(500).json({ message: 'Failed to convert JSON to React' });
-                }
-
-                res.json({
-                    message: "PDF processed and React files generated",
-                    fileName: req.file.filename
-                });
-            });
+        console.log("Uploaded file path:", req.file.path);
+        res.json({ 
+            message: "File uploaded successfully", 
+            filePath: req.file.path,
+            fileName: req.file.filename,
+            content: "Your PDF has been processed"
         });
     } catch (error) {
         console.error("Error during PDF upload:", error);
@@ -75,27 +62,17 @@ router.delete('/delete-pdf/:filename', (req, res) => {
         const filename = req.params.filename;
         const filePath = path.join(uploadsDir, filename);
 
+        // Check if file exists
         if (!fs.existsSync(filePath)) {
             return res.status(404).json({ message: "File not found" });
         }
 
+        // Delete the file
         fs.unlinkSync(filePath);
         res.json({ message: "File deleted successfully" });
     } catch (error) {
         console.error("Error deleting file:", error);
         res.status(500).json({ message: `Error deleting file: ${error.message}` });
-    }
-});
-
-// Route to serve the generated JSX and CSS files
-router.get('/fetch-visual-abstract', (req, res) => {
-    try {
-        const jsx = fs.readFileSync('./Outputs/Finals/VisualAbstract.jsx', 'utf8');
-        const css = fs.readFileSync('./Outputs/Finals/VisualAbstract.css', 'utf8');
-        res.json({ jsx, css });
-    } catch (error) {
-        console.error("Error fetching visual abstract files:", error);
-        res.status(500).json({ message: 'Failed to fetch visual abstract' });
     }
 });
 

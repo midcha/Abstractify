@@ -1,7 +1,6 @@
 {
   "name": "ai-atl-2024",
   "version": "1.0.0",
-  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",

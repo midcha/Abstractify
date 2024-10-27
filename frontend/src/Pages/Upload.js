@@ -1,11 +1,13 @@
-const React = require('react');
-const PdfUpload = require('../Components/PdfUpload'); // Import PdfUpload component
+import React from 'react';
+import PdfUpload from '../Components/PdfUpload';
 
 const Upload = () => {
-  return React.createElement('div', null, 
-    React.createElement('h1', null, 'Upload Page'),
-    React.createElement(PdfUpload, null) // Using PdfUpload component
-  );
-};
+    return (
+        <div>
+            <h2>Login Page</h2>
+            <PdfUpload />
+        </div>
+    );
+}
 
-module.exports = Upload; // Export the Upload component
+export default Upload;

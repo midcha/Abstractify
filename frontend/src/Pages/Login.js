@@ -1,14 +1,14 @@
 // src/Login.js
-const React = require('react');
-const GoogleLoginButton = require('../Components/GoogleLoginButton');
+import React from 'react';
+import GoogleLoginButton from '../Components/GoogleLoginButton';
 
 const Login = () => {
   return (
     <div>
       <h2>Login Page</h2>
-      <GoogleLoginButton />
+      <GoogleLoginButton></GoogleLoginButton>
     </div>
   );
 };
 
-module.exports = Login;
+export default Login;
