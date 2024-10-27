@@ -51,8 +51,6 @@ app.use('/api/pdf', pdfRoutes);
 const toJsonRoutes = require('./routes/getJSON');
 app.use('/api/toJson', toJsonRoutes);
 
-const toJSXRoutes = require('./routes/JSONtoReact');
-app.use('/api/toJSX', toJSXRoutes);
 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
