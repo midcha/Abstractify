@@ -1,18 +1,17 @@
-// src/Navbar.js
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import '../CSS files/Navbar.css';
-import GoogleLoginButton from '../Components/GoogleLoginButton';
+const React = require('react');
+const { useState, useEffect } = require('react');
+const { Link } = require('react-router-dom');
+require('../CSS files/Navbar.css');
+const GoogleLoginButton = require('./GoogleLoginButton');
 
-const Navbar = () => {
+function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Check authentication status on mount
     const checkAuthStatus = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/auth/status', {
-          credentials: 'include', // Important if using cookies for session management
+          credentials: 'include',
         });
         const data = await response.json();
         setIsAuthenticated(data.isAuthenticated);
@@ -31,9 +30,9 @@ const Navbar = () => {
       </li>
       <div className="rightLinks">
         {isAuthenticated ? (
-          <Link to="/account" className="account-link">Account</Link> // Link to account page if authenticated
+          <Link to="/account" className="account-link">Account</Link>
         ) : (
-          <GoogleLoginButton className="login" /> // Login button if not authenticated
+          <GoogleLoginButton className="login" />
         )}
         <li className="uploads">
           <Link to="/upload" className="uploads">Upload PDF</Link>
@@ -44,6 +43,6 @@ const Navbar = () => {
       </div>
     </div>
   );
-};
+}
 
-export default Navbar;
+module.exports = Navbar;

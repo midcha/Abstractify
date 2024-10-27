@@ -1,29 +1,29 @@
-import React from 'react';
-import '../CSS files/Home.css';
+const React = require('react');
+require('../CSS files/Home.css');
 
 const Home = () => {
-  return (
-    <div className="mainbox">
-      <h1>Abstractify</h1>
-      <h2>Visualizing your information</h2>
-      <div className="contentBox">
-        <div id='infoBox' className="about">
-
-        </div>
-        <div id='infoBox' className="demos">
-
-        </div>
-        <div className="bottom">
-          <div id='infoBox' className="contact">
-
-          </div>
-          <div className="getStarted">
-            <a href="">Get Started</a>
-          </div>
-        </div>
-      </div>
-    </div>
+  return React.createElement(
+    'div',
+    { className: 'mainbox' },
+    React.createElement('h1', null, 'Abstractify'),
+    React.createElement('h2', null, 'Visualizing your information'),
+    React.createElement(
+      'div',
+      { className: 'contentBox' },
+      React.createElement('div', { id: 'infoBox', className: 'about' }),
+      React.createElement('div', { id: 'infoBox', className: 'demos' }),
+      React.createElement(
+        'div',
+        { className: 'bottom' },
+        React.createElement('div', { id: 'infoBox', className: 'contact' }),
+        React.createElement(
+          'div',
+          { className: 'getStarted' },
+          React.createElement('a', { href: '' }, 'Get Started')
+        )
+      )
+    )
   );
 };
 
-export default Home;
+module.exports = Home;

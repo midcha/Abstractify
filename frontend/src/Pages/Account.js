@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+const React = require('react');
+const { useEffect, useState } = require('react');
 
 const Account = () => {
   const [user, setUser] = useState(null);
@@ -50,19 +51,25 @@ const Account = () => {
     return 'No email available';
   };
 
-  return (
-    <div className="account-page">
-      {user ? (
-        <>
-          <h1>Welcome, {getFullName(user)}</h1>
-          <p>Email: {getEmail(user)}</p>
-          <button onClick={handleLogout}>Logout</button>
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
+  return React.createElement(
+    'div',
+    { className: 'account-page' },
+    user ? (
+      React.createElement(
+        React.Fragment,
+        null,
+        React.createElement('h1', null, `Welcome, ${getFullName(user)}`),
+        React.createElement('p', null, `Email: ${getEmail(user)}`),
+        React.createElement(
+          'button',
+          { onClick: handleLogout },
+          'Logout'
+        )
+      )
+    ) : (
+      React.createElement('p', null, 'Loading...')
+    )
   );
 };
 
-export default Account;
+module.exports = Account;

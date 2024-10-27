@@ -10,7 +10,7 @@ async function generateContent() {
     
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
-    const uploadResponse = await fileManager.uploadFile("./TestPapers/Paper1.pdf", {
+    const uploadResponse = await fileManager.uploadFile("./TestPapers/Paper5.pdf", {
         mimeType: "application/pdf",
         displayName: "ResearchPaperPDF",
     });
