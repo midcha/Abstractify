@@ -12,28 +12,9 @@ const RenderView = () => {
         const generateVisualAbstract = async () => {
             try {
                 // Step 1: Generate JSON from uploaded PDF
-                const resultResponse = await axios.post('http://localhost:5000/api/toJson/generate-json', {
+                const ReactString = await axios.post('http://localhost:5000/api/toJson/generate-react-live', {
                     filePath: `./uploads/${fileName}`
                 });
-                
-                // Step 2: Convert JSON to React component via Claude
-                await axios.post('http://localhost:5000/api/toJSX/convert-to-jsx');
-
-                // Step 3: Dynamically check for and import generated VisualAbstract.jsx
-                const checkFileExists = async () => {
-                    try {
-                        // Attempt to dynamically import VisualAbstract.jsx if it exists in the frontend directory
-                        const { default: VisualAbstractComponent } = await import(`../finals/VisualAbstract`);
-                        setVisualAbstract(() => VisualAbstractComponent); // Set as a functional component
-                        setIsLoading(false);
-                    } catch (err) {
-                        // Retry after 1 second if the file doesn't exist yet
-                        console.log("VisualAbstract.jsx not found. Retrying...");
-                        setTimeout(checkFileExists, 1000);
-                    }
-                };
-
-                checkFileExists();
 
             } catch (error) {
                 console.error("Error generating Visual Abstract:", error);

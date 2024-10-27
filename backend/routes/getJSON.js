@@ -32,8 +32,25 @@ async function generateContent(filePath) {
     return result.response.text();
 }
 
-// Route to generate JSON from uploaded PDF
-router.post('/generate-json', async (req, res) => {
+async function generateResponseFromText(promptText) {
+    console.log("Generating response using Google Generative AI.");
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
+
+    // Get the generative model
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+
+    // Generate content based on the provided prompt text
+    const result = await model.generateContent([
+        { text: promptText }
+    ]);
+
+    // Return the generated response
+    return result.response.text();
+}
+
+
+// Route to generate react-live from uploaded PDF
+router.post('/generate-react-live', async (req, res) => {
     const { filePath } = req.body; // Expecting filePath in the request body
 
     try {
@@ -41,13 +58,12 @@ router.post('/generate-json', async (req, res) => {
             return res.status(400).json({ message: "File path is required" });
         }
 
-        const resultText = await generateContent(filePath);
+        const resultJSON = await generateContent(filePath);
+        const JSONtoReact = fs.readFileSync(path.join(__dirname, '../Prompts/JSONtoReact.txt'), 'utf8');
+        const resultdraft = await generateResponseFromText(resultJSON + JSONtoReact);
 
-        // Optionally, write the result to a file
-        fs.writeFileSync('./Outputs/result.json', JSON.stringify(resultText, null, 2));
-        console.log("Result has been exported to result.json");
+        res.json({ message: "JSON generated successfully", content: resultdraft });
 
-        res.json({ message: "Content generated successfully", content: resultText });
     } catch (error) {
         console.error("Error generating content:", error);
         res.status(500).json({ message: "Failed to generate content", error: error.message });
