@@ -126,8 +126,7 @@ body {
     font-weight: 800;
     font-size: xx-large;
 }
-
-#infoBox p {
+#infoBox p, li {
     margin-left: 2em;
     margin-top: 1em;
     margin-right: 2em;
@@ -143,9 +142,18 @@ body {
 }
 
 img {
-    width: 400px;
+    width: 460px;
     height: auto;
     border-radius: .5rem;
+    animation: appear linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 50%;
+}
+#imgCaption {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
     animation: appear linear both;
     animation-timeline: view();
     animation-range: cover 0% cover 50%;
