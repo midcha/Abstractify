@@ -3,7 +3,7 @@ import { LiveProvider, LivePreview } from 'react-live';
 import { useParams, useLocation } from 'react-router-dom';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import axios from 'axios';
-
+import '../CSS files/RenderView.css';
 
 const RenderView = () => {
     const location = useLocation();
@@ -75,13 +75,21 @@ const RenderView = () => {
     }, [fileName, location.state?.outputString]);
 
     if (isLoading) {
-        return <div className="p-4">Loading...</div>;
+        return (
+            <div className="loading-container">
+                <div className="loading-content">
+                    <div className="loading-spinner"></div>
+                    <h2>Generating Visual Abstract</h2>
+                    <p>Please wait while we process your request...</p>
+                </div>
+            </div>
+        );
     }
 
     return (
         <div className="p-4">
             {error ? (
-                <div className="text-red-500">{error}</div>
+                <div className="error">{error}</div>
             ) : (
                 <>
                     <div className="metadata mb-4 p-4 bg-gray-100 rounded">

@@ -1,0 +1,109 @@
+/* RenderView.css */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 89vh;
+    background: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+    padding: 2em;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 1em;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    animation: fade-in 0.8s ease-in both;
+}
+
+.loading-content h2 {
+    color: rgb(48, 101, 154);
+    font-size: 1.5em;
+    font-weight: 600;
+    margin: 0;
+}
+
+.loading-content p {
+    color: rgb(2, 91, 224);
+    font-weight: 500;
+    margin: 0;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgb(190, 226, 255);
+    border-top: 5px solid rgb(48, 101, 154);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.error {
+    height:89vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.p-4 {
+    height:89vh;
+}
+/* Styles for the rendered content */
+/* .metadata {
+    background: white;
+    border-radius: 1em;
+    box-shadow: -12px 12px rgb(24, 112, 179);
+    animation: appear linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 50%;
+    padding: 2em;
+    margin-bottom: 2em;
+}
+
+.metadata h2 {
+    color: rgb(48, 101, 154);
+    font-size: 1.8em;
+    font-weight: 800;
+    margin-bottom: 0.5em;
+}
+
+.metadata p {
+    color: rgb(2, 91, 224);
+    font-weight: 500;
+    line-height: 1.5em;
+    margin-bottom: 0.5em;
+} */
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        scale: 0.5;
+    }
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}

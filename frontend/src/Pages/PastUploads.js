@@ -42,7 +42,6 @@ const PastUploads = () => {
     return (
       <div className="login-prompt">
         <h2>Please log in to view your past uploads</h2>
-        <GoogleLoginButton />
       </div>
     );
   }
