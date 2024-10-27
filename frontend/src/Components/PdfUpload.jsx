@@ -22,14 +22,16 @@ const PdfUpload = () => {
             setError("Please select a PDF file to upload.");
             return;
         }
-        
+       
         setLoading(true);
         const formData = new FormData();
         formData.append('pdf', file);
-
+        
         try {
+
             const res = await axios.post('http://localhost:5000/api/pdf/upload-pdf', formData, {
                 headers: { 
+
                     'Content-Type': 'multipart/form-data'
                 },
                 withCredentials: true
@@ -48,6 +50,7 @@ const PdfUpload = () => {
     };
 
     return (
+
         <div className="p-4">
             <h2 className="text-xl font-bold mb-4">Upload a PDF</h2>
             <input 
@@ -64,6 +67,45 @@ const PdfUpload = () => {
                 {loading ? 'Uploading...' : 'Upload PDF'}
             </button>
             {error && <div className="text-red-500 mt-2">{error}</div>}
+
+        <div className="upload-container">
+            <h1>Upload a PDF</h1>
+            <div className="upload-content">
+                <div className="upload-row">
+                    <input
+                        type="file"    
+                        onChange={handleFileChange}
+                        accept="application/pdf"
+                        className="file-input"
+                    />
+                    
+                    {loading ? (
+                        <p className="upload-loading">Uploading...</p>
+                    ) : (
+                        <button
+                            onClick={handleUpload}
+                            className="upload-button"
+                            disabled={!file}
+                        >
+                            Upload PDF
+                        </button>
+                    )}
+                </div>
+
+                {error && (
+                    <div className="upload-error">
+                        {error}
+                    </div>
+                )}
+                
+                {response && (
+                    <div className="upload-response">
+                        <h3>Server Response:</h3>
+                        <p>{response}</p>
+                    </div>
+                )}
+            </div>
+>>>>>>> main
         </div>
     );
 };

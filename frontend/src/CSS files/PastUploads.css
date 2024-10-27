@@ -1,11 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 .wrapper {
-    background-color: white;
+    font-family: 'Inter';
+    background: none;
     width: 100vw;
-    display:flex;
+    min-height: 100vh;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: auto;
-    margin-right: auto;
     padding-top: 5vh;
     gap: 4em;
 }
@@ -15,55 +17,151 @@
     align-items: center;
     width: 90vw;
     justify-content: space-between;
+    animation: fade-in-bottom 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 .headAndFirst h2 {
-    background-color: rgb(228, 246, 255);
+    background-color: white;
     font-size: 4em;
-    padding: 1em;
+    padding: 0.8em;
     border-radius: 1rem;
     box-shadow: -32px 16px rgb(24, 112, 179);
+    color: rgb(48, 101, 154);
+    transition: transform 0.3s ease;
 }
-.wrapper h3 {
-    font-size: x-large;
+
+.headAndFirst h2:hover {
+    transform: translateY(-5px);
+}
+
+.wrapper h1 {
+    font-size: 2.5em;
     font-weight: 800;
+    color: rgb(48, 101, 154);
 }
 
 .recentUpload {
-    background-color: rgb(200, 211, 215);
-    padding: 1em;
-    border-radius: .5rem;
-    width:50vw;
-    height:15vh;
-
+    background-color: white;
+    padding: 1.5em;
+    border-radius: 1rem;
+    width: 50vw;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    box-shadow: -12px 12px 2px 1px rgba(24, 112, 179, 0.2);
+    transition: all 0.3s ease;
+    animation: fade-in 0.8s ease-in both;
 }
+
 .recentUpload:hover {
-    background-color: rgb(228, 246, 255);
+    background: linear-gradient(to right, rgb(246, 254, 255), rgb(102, 163, 255));
+    transform: translateY(-5px);
     cursor: pointer;
 }
 
 .genUploads {
-    margin-left: 4em;
-    margin-right: 4em;
-    padding: 1em;
+    margin-left: auto;
+    margin-right: 5vw;
+    width: 75vw;
+    padding: 1.5em;
     height: 15vh;
-    background-color: rgb(200, 211, 215);
-    border-radius: .5rem;
+    background-color: white;
+    border-radius: 1rem;
+    position: relative;
+    display: flex;
+    box-shadow: -12px 12px 2px 1px rgba(24, 112, 179, 0.2);
+    transition: all 0.3s ease;
+    animation: appear linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 50%;
 }
+
 .genUploads:hover {
-    background-color: rgb(228, 246, 255);
+    background: linear-gradient(to right, rgb(246, 254, 255), rgb(102, 163, 255));
+    transform: translateY(-5px);
     cursor: pointer;
 }
 
-.wrapper .recentUpload p {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+#dateID {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
 }
 
 #uploadWrapperLink {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    width: inherit;
     text-decoration: none;
 }
 
+#uploadWrapperLink h3 {
+    font-size: x-large;
+    color: rgb(24, 112, 179);
+}
+
+.genUploads #uploadWrapperLink {
+    width: 70vw;
+}
+
+.genUploads::before {
+    content: "–";
+    position: absolute;
+    left: -1em;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 4em;
+    color: rgb(24, 112, 179);
+}
+
+.login-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    padding-bottom: 29.5vh;
+    gap: 2em;
+    background: none;
+}
+
+.login-prompt h2 {
+    color: rgb(48, 101, 154);
+    font-size: 2.5em;
+    text-align: center; 
+    animation: fade-in-bottom 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        scale: 0.5;
+    }
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+@keyframes fade-in-bottom {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
