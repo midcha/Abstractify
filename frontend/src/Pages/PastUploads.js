@@ -1,8 +1,6 @@
-// src/PastUploads.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS files/PastUploads.css';
-import GoogleLoginButton from '../Components/GoogleLoginButton';
 
 const PastUploads = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -38,6 +36,17 @@ const PastUploads = () => {
     }
   }, [isAuthenticated]);
 
+  const handleSelectUpload = (upload) => {
+    navigate(`/render-view/${upload.fileName}`, {
+      state: {
+        outputString: upload.outputString,
+        title: upload.title,
+        doi: upload.doi,
+        dateAccessed: upload.dateAccessed,
+      },
+    });
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="login-prompt">
@@ -46,22 +55,11 @@ const PastUploads = () => {
     );
   }
 
-  const handleSelectUpload = (upload) => {
-    navigate(`/render-view/${upload.fileName}`, {
-      state: {
-        outputString: upload.outputString, // Pass saved output string
-        title: upload.title,
-        doi: upload.doi,
-        dateAccessed: upload.dateAccessed,
-      },
-    });
-  };
-
   return (
     <div className="wrapper">
       <div className="headAndFirst">
         <h2>Past Uploads</h2>
-        {uploads.length > 0 ? (
+        {uploads.length > 0 && (
           <div className="recentUpload" onClick={() => handleSelectUpload(uploads[0])}>
             <a id="uploadWrapperLink">
               <h1>{uploads[0].title}</h1>
@@ -71,23 +69,30 @@ const PastUploads = () => {
               </div>
             </a>
           </div>
-        ) : (
-          <p>No uploads found.</p>
         )}
       </div>
-      <div className="genUploads">
-        {uploads.slice(1).map((upload) => (
-          <div key={upload._id} className="upload-item" onClick={() => handleSelectUpload(upload)}>
-            <a id="uploadWrapperLink">
-              <h1>{upload.title}</h1>
-              <div id="dateID">
-                <h3>{upload.doi}</h3>
-                <h3>{new Date(upload.dateAccessed).toLocaleDateString()}</h3>
-              </div>
-            </a>
-          </div>
-        ))}
-      </div>
+
+      {uploads.slice(1).map((upload, index) => (
+        <div 
+          key={upload._id || index}
+          className="genUploads"
+          onClick={() => handleSelectUpload(upload)}
+        >
+          <a id="uploadWrapperLink">
+            <h1>{upload.title}</h1>
+            <div id="dateID">
+              <h3>{upload.doi}</h3>
+              <h3>{new Date(upload.dateAccessed).toLocaleDateString()}</h3>
+            </div>
+          </a>
+        </div>
+      ))}
+
+      {uploads.length === 0 && (
+        <div className="login-prompt">
+          <h2>No uploads found.</h2>
+        </div>
+      )}
     </div>
   );
 };
