@@ -1,0 +1,101 @@
+/* PDF Upload Component Styles */
+.upload-container {
+    height: 89.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    z-index: 3;
+}
+
+.upload-container h1 {
+    color: rgb(48, 101, 154);
+    font-size: 6em;
+    position: relative;
+    margin: 0;
+    animation: fade-in-bottom 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+.upload-content {
+    width: 35vw;
+    background-color: white;
+    border-radius: 1em;
+    box-shadow: -32px 16px rgb(24, 112, 179);
+    padding: 2em;
+    margin-top: 2em;
+    animation: appear linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 50%;
+}
+
+.upload-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 2em;
+}
+
+.file-input {
+    font-size: 1.2em;
+    font-family: 'Inter', sans-serif;
+    flex: 1;
+}
+
+.upload-button {
+    font-size: larger;
+    background-color: white;
+    border-radius: 1em;
+    padding: 1rem;
+    box-shadow: -8px 8px rgb(24, 112, 179);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    animation: fade-in 0.8s ease-in both;
+}
+
+.upload-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.upload-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: -10px 10px rgb(24, 112, 179);
+}
+
+.upload-loading {
+    font-weight: bold;
+    color: rgb(2, 91, 224);
+    animation: fade-in 0.5s ease-in both;
+}
+
+.upload-error {
+    color: #e74c3c;
+    font-weight: 500;
+    margin-top: 1em;
+    animation: fade-in 0.5s ease-in both;
+}
+
+.upload-response {
+    background-color: white;
+    border-radius: 0.5em;
+    padding: 1.5em;
+    margin-top: 1em;
+    box-shadow: -16px 8px rgb(24, 112, 179);
+    animation: appear linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 50%;
+}
+
+.upload-response h3 {
+    color: rgb(48, 101, 154);
+    font-weight: 800;
+    margin-bottom: 0.5em;
+}
+
+.upload-response p {
+    line-height: 1.5em;
+    color: rgb(2, 91, 224);
+}

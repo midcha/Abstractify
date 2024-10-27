@@ -1,4 +1,6 @@
+// Account.js (keeping it simple)
 import React, { useEffect, useState } from 'react';
+import '../CSS files/Account.css';
 
 const Account = () => {
   const [user, setUser] = useState(null);
@@ -12,7 +14,7 @@ const Account = () => {
         });
         const data = await response.json();
         if (data.isAuthenticated) {
-          console.log('User data:', data.user); // Debug log to see the structure
+          console.log('User data:', data.user);
           setUser(data.user);
         }
       } catch (error) {
@@ -27,7 +29,6 @@ const Account = () => {
     window.open('http://localhost:5000/api/auth/logout', '_self');
   };
 
-  // Helper function to format the full name
   const getFullName = (user) => {
     if (user.name.givenName && user.name.familyName) {
       return `${user.name.givenName} ${user.name.familyName}`;
@@ -39,7 +40,15 @@ const Account = () => {
     return 'Unknown';
   };
 
-  // Helper function to get email - handles both direct email property and nested emails array
+  const getFirstName = (user) => {
+    if (user.name.givenName && user.name.familyName) {
+      return `${user.name.givenName}`;
+    } else if (user.name.familyName) {
+      return user.name.familyName;
+    }
+    return 'Unknown';
+  };
+
   const getEmail = (user) => {
     if (user.emails && user.emails.length > 0) {
       return user.emails[0].value;
@@ -53,13 +62,15 @@ const Account = () => {
   return (
     <div className="account-page">
       {user ? (
-        <>
-          <h1>Welcome, {getFullName(user)}</h1>
-          <p>Email: {getEmail(user)}</p>
-          <button onClick={handleLogout}>Logout</button>
-        </>
+        <div className="account-content">
+          <h1>Welcome, <span className="highlight">{getFirstName(user)}</span></h1>
+          <div className="user-info">
+            <p>Email: {getEmail(user)}</p>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        </div>
       ) : (
-        <p>Loading...</p>
+        <p className="loading">Loading...</p>
       )}
     </div>
   );
