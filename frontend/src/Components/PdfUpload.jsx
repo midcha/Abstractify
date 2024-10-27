@@ -22,16 +22,14 @@ const PdfUpload = () => {
             setError("Please select a PDF file to upload.");
             return;
         }
-       
+        
         setLoading(true);
         const formData = new FormData();
         formData.append('pdf', file);
-        
-        try {
 
+        try {
             const res = await axios.post('http://localhost:5000/api/pdf/upload-pdf', formData, {
                 headers: { 
-
                     'Content-Type': 'multipart/form-data'
                 },
                 withCredentials: true
@@ -50,24 +48,6 @@ const PdfUpload = () => {
     };
 
     return (
-
-        <div className="p-4">
-            <h2 className="text-xl font-bold mb-4">Upload a PDF</h2>
-            <input 
-                type="file" 
-                onChange={handleFileChange} 
-                accept="application/pdf" 
-                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
-            />
-            <button 
-                onClick={handleUpload}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-                disabled={!file || loading}
-            >
-                {loading ? 'Uploading...' : 'Upload PDF'}
-            </button>
-            {error && <div className="text-red-500 mt-2">{error}</div>}
-
         <div className="upload-container">
             <h1>Upload a PDF</h1>
             <div className="upload-content">
@@ -78,7 +58,7 @@ const PdfUpload = () => {
                         accept="application/pdf"
                         className="file-input"
                     />
-                    
+                
                     {loading ? (
                         <p className="upload-loading">Uploading...</p>
                     ) : (
@@ -92,12 +72,13 @@ const PdfUpload = () => {
                     )}
                 </div>
 
+
                 {error && (
                     <div className="upload-error">
                         {error}
                     </div>
                 )}
-                
+            
                 {response && (
                     <div className="upload-response">
                         <h3>Server Response:</h3>
@@ -105,7 +86,6 @@ const PdfUpload = () => {
                     </div>
                 )}
             </div>
->>>>>>> main
         </div>
     );
 };
