@@ -39,7 +39,7 @@ async function generateResponseFromText(promptText) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
 
     // Get the generative model
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" , temperature: 0.4});
 
     // Generate content based on the provided prompt text
     const result = await model.generateContent([
