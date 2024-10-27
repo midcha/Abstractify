@@ -35,12 +35,10 @@ const Navbar = () => {
         ) : (
           <GoogleLoginButton className="login" /> // Login button if not authenticated
         )}
-        <li className="uploads">
+
           <Link to="/upload" className="uploads">Upload PDF</Link>
-        </li>
-        <li className="uploads">
           <Link to="/past-uploads" className="upload-link">Past Uploads</Link>
-        </li>
+
       </div>
     </div>
   );
