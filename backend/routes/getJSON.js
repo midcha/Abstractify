@@ -62,7 +62,32 @@ router.post('/fetch-metadata', async (req, res) => {
             displayName: "ResearchPaperPDF",
         });
 
-        const prompt = "You must extract the DOI and title from this research article. Ensure the DOI is composed only of numbers and periods. Return them in this simple format: <DOI>/<title>. Do not add any extra output.";
+        const prompt = `Extract the DOI and title from this academic paper PDF. Follow these specific steps:
+
+1. For DOI:
+   - Look for "DOI:", "doi:", or "https://doi.org/" in the text
+   - Extract ONLY the numbers and periods (format: XX.XXXX/XXXXX)
+   - If multiple DOIs found, use the first one
+   - If no DOI found, return "NO_DOI"
+
+2. For title:
+   - Look for the largest text at the top of the first page
+   - Ignore headers, journal names, and author names
+   - Remove any line breaks within the title
+   - Preserve special characters and mathematical symbols
+   - If no clear title found, return "NO_TITLE"
+
+3. Return format:
+   - Exactly this format with no additional text: <DOI>/<TITLE>
+   - Example: 10.1234/5678/Paper Title Here
+
+4. Validation rules:
+   - DOI must only contain numbers, periods, and forward slashes
+   - Title must not contain line breaks or excessive spaces
+   - Remove any XML or HTML tags from the title
+   - Title should be in original case (don't convert to upper/lower)
+
+Parse this PDF and return ONLY the DOI and title in the specified format:`;
         
         const result = await model.generateContent([
             {
@@ -100,23 +125,14 @@ router.post('/generate-react-live', async (req, res) => {
         }
 
         // Check for existing paper with the same DOI
-        const existingPaper = await ResearchPaper.findOne({ doi });
+        const existingPaper = await ResearchPaper.findOne({ title });
         
         if (existingPaper) {
-            // If DOI matches, check if the title also matches
-            if (existingPaper.title === title) {
-                // If both DOI and title match, return the existing data
-                return res.json({ 
-                    message: "Paper with this DOI and title already exists", 
-                    content: existingPaper.outputString,
-                    isExisting: true,
-                    paper: existingPaper
-                });
-            }
-            // If only DOI matches but title doesn't, indicate a conflict
-            return res.status(409).json({
-                message: "DOI already exists with a different title",
-                existingTitle: existingPaper.title
+            return res.json({ 
+                message: "Paper with this DOI and title already exists", 
+                content: existingPaper.outputString,
+                isExisting: true,
+                paper: existingPaper
             });
         }
 
