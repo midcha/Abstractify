@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { LiveProvider, LivePreview } from 'react-live';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useParams, useLocation } from 'react-router-dom';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import axios from 'axios';
+
 
 const RenderView = () => {
+    const location = useLocation();
     const { fileName } = useParams();
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(!location.state?.outputString);
     const [error, setError] = useState("");
-    const [code, setCode] = useState('<div><strong>Visual Abstract is Loading...</strong></div>');
+    const [code, setCode] = useState(location.state?.outputString || '<div><strong>Visual Abstract is Loading...</strong></div>');
     const [metadata, setMetadata] = useState({
-        title: "Loading title...",
-        doi: "Loading DOI...",
-        dateAccessed: new Date().toLocaleDateString()
+        title: location.state?.title || "Loading title...",
+        doi: location.state?.doi || "Loading DOI...",
+        dateAccessed: location.state?.dateAccessed || new Date().toLocaleDateString()
     });
 
     const scope = { 
@@ -27,98 +29,50 @@ const RenderView = () => {
     };
 
     useEffect(() => {
-        let isMounted = true;
-        let controller = new AbortController();
-
-        const fetchMetadataAndGenerate = async () => {
-            try {
-                if (!fileName) return;
-
-                // Fetch metadata
-                console.log("Fetching metadata for file:", fileName);
-                const metadataResponse = await axios.post('http://localhost:5000/api/toJson/fetch-metadata', 
-                    {
+        // Only fetch metadata and generate code if outputString is not provided
+        if (!location.state?.outputString) {
+            const fetchMetadataAndGenerate = async () => {
+                try {
+                    const metadataResponse = await axios.post('http://localhost:5000/api/toJson/fetch-metadata', {
                         filePath: `./uploads/${fileName}`
-                    },
-                    {
-                        signal: controller.signal
-                    }
-                );
+                    });
 
-                if (!isMounted) return;
+                    const { doi, title } = metadataResponse.data;
 
-                if (metadataResponse.data) {
-                    try {
-                        const { doi, title } = metadataResponse.data;
-                        
-                        if (isMounted) {
-                            setMetadata(prev => ({
-                                ...prev,
-                                doi: doi || "DOI not found",
-                                title: title || "Title not found"
-                            }));
-                        }
+                    setMetadata(prev => ({
+                        ...prev,
+                        doi: doi || "DOI not found",
+                        title: title || "Title not found"
+                    }));
 
-                        // Visual Abstract generation
-                        const visualAbstractRequest = {
+                    const response = await axios.post(
+                        'http://localhost:5000/api/toJson/generate-react-live',
+                        {
                             filePath: `./uploads/${fileName}`,
-                            title: title,
-                            doi: doi
-                        };
-                        
-                        const response = await axios.post(
-                            'http://localhost:5000/api/toJson/generate-react-live',
-                            visualAbstractRequest,
-                            {
-                                signal: controller.signal
-                            }
-                        );
-
-                        if (!isMounted) return;
-
-                        if (response.data && typeof response.data.content === 'string') {
-                            setCode(response.data.content);
-                        } else {
-                            console.error("Unexpected response format:", response.data);
-                            setError("Received unexpected data format from the server.");
+                            title,
+                            doi
                         }
-                    } catch (metadataError) {
-                        if (!isMounted) return;
-                        console.error("Error processing metadata:", metadataError);
-                        setMetadata(prev => ({
-                            ...prev,
-                            doi: "Error processing DOI",
-                            title: "Error processing title"
-                        }));
+                    );
+
+                    if (response.data && typeof response.data.content === 'string') {
+                        setCode(response.data.content);
+                    } else {
+                        console.error("Unexpected response format:", response.data);
+                        setError("Received unexpected data format from the server.");
                     }
-                }
-            } catch (error) {
-                if (!isMounted) return;
-                if (axios.isCancel(error)) {
-                    console.log('Request cancelled');
-                    return;
-                }
-                console.error("Error details:", {
-                    message: error.message,
-                    response: error.response?.data,
-                    status: error.response?.status
-                });
-                setError(`Failed to generate Visual Abstract: ${error.message}`);
-            } finally {
-                if (isMounted) {
+                } catch (error) {
+                    console.error("Error details:", error);
+                    setError(`Failed to generate Visual Abstract: ${error.message}`);
+                } finally {
                     setIsLoading(false);
                 }
-            }
-        };
+            };
 
-        fetchMetadataAndGenerate();
-
-        // Cleanup function
-        return () => {
-            isMounted = false;
-            controller.abort();
-        };
-    }, [fileName]); // Only dependency is fileName
+            fetchMetadataAndGenerate();
+        } else {
+            setIsLoading(false);
+        }
+    }, [fileName, location.state?.outputString]);
 
     if (isLoading) {
         return <div className="p-4">Loading...</div>;

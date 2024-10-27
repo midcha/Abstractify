@@ -62,7 +62,7 @@ router.post('/fetch-metadata', async (req, res) => {
             displayName: "ResearchPaperPDF",
         });
 
-        const prompt = "You must extract the DOI and title from this research article. Return them in this simple format: <DOI>/<title>. Do not add any extra output.";
+        const prompt = "You must extract the DOI and title from this research article. Ensure the DOI is composed only of numbers and periods. Return them in this simple format: <DOI>/<title>. Do not add any extra output.";
         
         const result = await model.generateContent([
             {
@@ -90,7 +90,7 @@ router.post('/fetch-metadata', async (req, res) => {
     }
 });
 
-// Modified generate-react-live route with duplicate DOI check
+// Modified generate-react-live route with duplicate DOI and title check
 router.post('/generate-react-live', async (req, res) => {
     const { filePath, title, doi } = req.body;
 
@@ -103,12 +103,20 @@ router.post('/generate-react-live', async (req, res) => {
         const existingPaper = await ResearchPaper.findOne({ doi });
         
         if (existingPaper) {
-            // If paper with DOI exists, return the existing data
-            return res.json({ 
-                message: "Paper with this DOI already exists", 
-                content: existingPaper.outputString,
-                isExisting: true,
-                paper: existingPaper
+            // If DOI matches, check if the title also matches
+            if (existingPaper.title === title) {
+                // If both DOI and title match, return the existing data
+                return res.json({ 
+                    message: "Paper with this DOI and title already exists", 
+                    content: existingPaper.outputString,
+                    isExisting: true,
+                    paper: existingPaper
+                });
+            }
+            // If only DOI matches but title doesn't, indicate a conflict
+            return res.status(409).json({
+                message: "DOI already exists with a different title",
+                existingTitle: existingPaper.title
             });
         }
 

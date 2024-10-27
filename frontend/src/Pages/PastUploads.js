@@ -6,11 +6,10 @@ import GoogleLoginButton from '../Components/GoogleLoginButton';
 
 const PastUploads = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [uploads, setUploads] = useState([]); // State to hold past uploads
+  const [uploads, setUploads] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check authentication status on mount
     const checkAuthStatus = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/auth/status', {
@@ -23,12 +22,11 @@ const PastUploads = () => {
       }
     };
 
-    // Fetch past uploads if authenticated
     const fetchUploads = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/toJson/research-papers');
         const data = await response.json();
-        setUploads(data); // Set the uploads data
+        setUploads(data);
       } catch (error) {
         console.error('Failed to fetch past uploads:', error);
       }
@@ -40,7 +38,6 @@ const PastUploads = () => {
     }
   }, [isAuthenticated]);
 
-  // If the user isn't authenticated, show the login prompt
   if (!isAuthenticated) {
     return (
       <div className="login-prompt">
@@ -50,13 +47,19 @@ const PastUploads = () => {
     );
   }
 
-  // Function to handle navigation to render view with selected upload
   const handleSelectUpload = (upload) => {
-    navigate(`/render-view/${upload._id}`, { state: { outputString: upload.outputString } });
+    navigate(`/render-view/${upload.fileName}`, {
+      state: {
+        outputString: upload.outputString, // Pass saved output string
+        title: upload.title,
+        doi: upload.doi,
+        dateAccessed: upload.dateAccessed,
+      },
+    });
   };
 
   return (
-    <div className='wrapper'>
+    <div className="wrapper">
       <div className="headAndFirst">
         <h2>Past Uploads</h2>
         {uploads.length > 0 ? (
@@ -66,7 +69,7 @@ const PastUploads = () => {
               <div id="dateID">
                 <h3>{uploads[0].doi}</h3>
                 <h3>{new Date(uploads[0].dateAccessed).toLocaleDateString()}</h3>
-              </div>  
+              </div>
             </a>
           </div>
         ) : (
