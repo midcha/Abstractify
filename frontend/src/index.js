@@ -19,7 +19,7 @@ const App = () => (
       <Route path="/past-uploads" element={<PastUploads />} />
       <Route path="/upload" element={<Upload />} />
       <Route path="/account" element={<Account />} />
-      <Route path="/render-view" element={<RenderView />} /> {/* Add this route */}
+      <Route path="/render-view/:fileName" element={<RenderView />} />
     </Routes>
   </Router>
 );

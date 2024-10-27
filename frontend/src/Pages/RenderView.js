@@ -30,9 +30,13 @@ const RenderView = () => {
                     filePath: `./uploads/${fileName}`
                 });
                 
-                // Update the code state with the received ReactString
-                if (response.data) {
-                    setCode(response.data);
+                // Update the code state with the received content if it's a string
+                if (response.data && typeof response.data.content === 'string') {
+                    console.log(response.data.content);
+                    setCode(response.data.content);
+                } else {
+                    console.error("Unexpected response type, expected a string in `content`:", response.data);
+                    setError("Received unexpected data format from the server.");
                 }
             } catch (error) {
                 console.error("Error generating Visual Abstract:", error);
@@ -41,6 +45,7 @@ const RenderView = () => {
                 setIsLoading(false);
             }
         };
+        
 
         generateVisualAbstract();
     }, [fileName]);
@@ -51,17 +56,6 @@ const RenderView = () => {
                 <div className="text-red-500">{error}</div>
             ) : (
                 <LiveProvider code={code} scope={scope}>
-                    <LiveEditor />
-                    <button 
-                        className="px-4 py-2 mt-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                        onClick={() => {
-                            // Optional: Implement any onClick behavior if needed
-                            console.log("Run button clicked");
-                        }}
-                    >
-                        Run
-                    </button>
-                    <LiveError />
                     <LivePreview />
                 </LiveProvider>
             )}

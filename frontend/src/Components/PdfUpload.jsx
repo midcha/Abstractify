@@ -38,7 +38,7 @@ const PdfUpload = () => {
             setUploadedFileName(res.data.fileName);
             setError("");
             // Navigate to RenderView with uploaded file name
-            navigate(`/render-view`);
+            navigate(`/render-view/${res.data.fileName}`);
         } catch (error) {
             console.error("Error uploading PDF:", error);
             setError(error.response?.data?.message || "Failed to upload PDF. Please try again.");

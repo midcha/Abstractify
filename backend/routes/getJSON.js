@@ -4,6 +4,8 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { GoogleAIFileManager } = require("@google/generative-ai/server");
 require('dotenv').config();
 const fs = require('fs');
+const path = require('path');
+
 
 async function generateContent(filePath) {
     console.log("Using Google Generative AI to categorize content.");
@@ -50,6 +52,7 @@ async function generateResponseFromText(promptText) {
 
 
 // Route to generate react-live from uploaded PDF
+// Route to generate react-live from uploaded PDF
 router.post('/generate-react-live', async (req, res) => {
     const { filePath } = req.body; // Expecting filePath in the request body
 
@@ -60,8 +63,12 @@ router.post('/generate-react-live', async (req, res) => {
 
         const resultJSON = await generateContent(filePath);
         const JSONtoReact = fs.readFileSync(path.join(__dirname, '../Prompts/JSONtoReact.txt'), 'utf8');
-        const resultdraft = await generateResponseFromText(resultJSON + JSONtoReact);
+        let resultdraft = await generateResponseFromText(resultJSON + JSONtoReact);
 
+        // Remove ```javascript from the start and ``` from the end using regex
+        resultdraft = resultdraft.replace(/^```javascript\s*/, '').replace(/\s*```$/, '');
+
+        // Send resultdraft as a direct string in the response
         res.json({ message: "JSON generated successfully", content: resultdraft });
 
     } catch (error) {
@@ -69,5 +76,6 @@ router.post('/generate-react-live', async (req, res) => {
         res.status(500).json({ message: "Failed to generate content", error: error.message });
     }
 });
+
 
 module.exports = router;
