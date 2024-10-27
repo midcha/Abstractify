@@ -36,7 +36,7 @@ async function generateContent(filePath) {
 async function generateResponseFromText(promptText) {
     console.log("Generating response using Google Generative AI.");
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro", temperature: 0.4 });
     const result = await model.generateContent([
         { text: promptText }
     ]);
