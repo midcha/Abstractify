@@ -1,0 +1,118 @@
+.card {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .card-content {
+    padding: 24px;
+  }
+  
+  .card-header {
+    background-color: #f9fafb;
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .card-title {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .loading-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 160px;
+  }
+  
+  .spinner-circle {
+    width: 32px;
+    height: 32px;
+    border: 2px solid gray;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .alert {
+    padding: 16px;
+    background-color: #f3f4f6;
+    color: #1f2937;
+    border-radius: 4px;
+  }
+  
+  .alert-error {
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+  
+  .scroll-area {
+    height: 600px;
+    overflow-y: auto;
+  }
+  
+  .sections-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .section {
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid;
+    transition: all 0.3s ease;
+  }
+  
+  .section:hover {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section-overview { background-color: #ebf5ff; border-color: #bfdbfe; }
+  .section-context { background-color: #ecfdf5; border-color: #bbf7d0; }
+  .section-methodology { background-color: #f3e8ff; border-color: #d8b4fe; }
+  .section-results { background-color: #fef3c7; border-color: #fde68a; }
+  .section-discussion { background-color: #fce7f3; border-color: #f9a8d4; }
+  .section-conclusion { background-color: #ffedd5; border-color: #fdba74; }
+  .section-default { background-color: #f9fafb; border-color: #d1d5db; }
+  
+  .section-content {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .chevron-icon {
+    margin-top: 4px;
+    width: 20px;
+    height: 20px;
+    color: #6b7280;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .section-text {
+    color: #4b5563;
+    line-height: 1.5;
+  }
+  
+  .image-container {
+    margin-top: 16px;
+  }
+  
+  .section-image {
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }

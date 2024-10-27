@@ -9,6 +9,7 @@ import Login from './Pages/Login';     // Import Login component
 import PastUploads from './Pages/PastUploads'; // Import PastUploads component
 import Upload from './Pages/Upload';
 import Account from './Pages/Account';
+import SimplifiedPaper from './Components/SimplifiedPaper';
 // Main App Component with Router
 const App = () => (
   <Router>

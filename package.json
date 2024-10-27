@@ -25,6 +25,9 @@
     "package-lock.json": "^1.0.0",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "pdf-img-convert": "^2.0.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^4.7.76"
   }
 }
