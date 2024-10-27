@@ -62,7 +62,7 @@ router.post('/fetch-metadata', async (req, res) => {
             displayName: "ResearchPaperPDF",
         });
 
-        const prompt = `Extract the DOI and title from this academic paper PDF. Follow these specific steps:
+        const prompt = `Extract the exact DOI and main title from this academic paper PDF. Follow these precise rules:
 
 1. For DOI:
    - Look for "DOI:", "doi:", or "https://doi.org/" in the text
@@ -70,24 +70,35 @@ router.post('/fetch-metadata', async (req, res) => {
    - If multiple DOIs found, use the first one
    - If no DOI found, return "NO_DOI"
 
-2. For title:
-   - Look for the largest text at the top of the first page
-   - Ignore headers, journal names, and author names
-   - Remove any line breaks within the title
-   - Preserve special characters and mathematical symbols
-   - If no clear title found, return "NO_TITLE"
+2. For TITLE, look for these specific indicators:
+   - The title is usually the largest or most prominent text on the first page
+   - It appears BEFORE the author names and abstract
+   - It appears AFTER any journal headers or running headers
+   - It is typically longer than 3 words
+   - It must be a complete, grammatical phrase/sentence
+   - It CANNOT be:
+     * Running headers
+     * Journal names
+     * Author names or affiliations
+     * Random strings of numbers/letters
+     * Section headings
+     * File identifiers or document numbers
+     * Conference names
+     * Page numbers or dates
+     * ISSN/ISBN numbers
 
 3. Return format:
-   - Exactly this format with no additional text: <DOI>/<TITLE>
-   - Example: 10.1234/5678/Paper Title Here
+   - Exactly this format: <DOI>/<TITLE>
+   - Example: 10.1234/5678/Understanding Neural Networks in Deep Learning
 
-4. Validation rules:
-   - DOI must only contain numbers, periods, and forward slashes
-   - Title must not contain line breaks or excessive spaces
-   - Remove any XML or HTML tags from the title
-   - Title should be in original case (don't convert to upper/lower)
+4. Validation for title:
+   - Must be a coherent phrase that describes the paper's content
+   - Must make grammatical sense when read aloud
+   - Must not be less than 3 words or more than 50 words
+   - Must not contain file paths, URLs, or random alphanumeric strings
+   - If you cannot find a title matching these criteria, return "NO_TITLE"
 
-Parse this PDF and return ONLY the DOI and title in the specified format:`;
+Parse this PDF and return ONLY the DOI and title in the specified format. Do not include any additional text or explanations in your response.`;
         
         const result = await model.generateContent([
             {
