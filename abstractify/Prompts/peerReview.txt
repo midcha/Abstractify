@@ -1,0 +1,12 @@
+
+
+Can you make some edits if necessary to make sure the following holds?
+1.I want this Visual Abstract to not have any errors where texts or visuals are allocated outside any borders. This means all texts including headers and descriptions should fit inside their designated divs and borders.
+2.I want all the visuals such as graphs have visible data, labels, and descriptions.
+3.Make sure there are no syntax errors that causes compile errors. I also need you to make sure the libraries such as react-chartjs-2 is being used properly so that there are not compile time errors
+4.I want none of the elements overlapping or covering each other by being on top of each other. Do this by making it so that none of the individual divs for sections or elements are overlapping. For example, make sure There is enough spacing between a graph and the texts below, as the caption of the graph and the texts below might be on top of each other. To be clear, YOU MUST ensure that text does not overlap at all. If you need to add extra margin above or below any html elements, do so.
+Overall, your main task is to make sure nothing is out of bounds or on top of each other, covering each other. Also, please make sure that you are not dropping or losing ANY information from the code I have provided.
+Output just the code for VisualAbstract.js with inline styling only. I also want the Visual Abstract to fully fill my screen horizontally. This means I do not want to be scrolling sideways to see the full content. Also, make sure the styling of the grids is mindful and easy for readers to see.
+Very Importantly, Even if you are not making any changes, please output the code file with all the codes instead of a message that says "no changes" so that I can directly copy paste it and get it working. 
+
+##Your response should be the entire revised code top to bottom, verbatim. NO ABBREVIATING
