@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "express-session": "^1.18.1",
+    "formidable": "^3.5.2",
     "next": "15.0.2",
     "next-connect": "^1.0.0",
     "passport": "^0.7.0",
