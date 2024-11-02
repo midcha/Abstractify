@@ -87,7 +87,7 @@ const RenderView = () => {
     }
 
     return (
-        <div className="p-4">
+        <div className="preview-wrapper p-4">
             {error ? (
                 <div className="error">{error}</div>
             ) : (
